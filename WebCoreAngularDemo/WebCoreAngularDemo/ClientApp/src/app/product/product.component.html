@@ -1,0 +1,99 @@
+<style>
+  .info {
+    border-color: #2196F3;
+    color: dodgerblue;
+  }
+
+    .info:hover {
+      background: #2196F3;
+      color: white;
+    }
+
+  .btn {
+    /*border: 2px solid black;*/
+    background-color: white;
+    color: black;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 600;
+    width: 20%;
+  }
+</style>
+
+<div class="portlet-title">
+  <!--<div class="caption">
+    <i class="fa  fa-cogs font-green-sharp"></i>
+    <span class="caption-subject font-green-sharp bold uppercase">Product Details</span>
+  </div>-->
+  <div class="actions">
+    <a id="tab_images_uploader_uploadfiles" [routerLink]="['/product-list']" class="btn green-haze btn-circle btn info">
+      <i class="fa fa-arrow-circle-left"></i>
+      <span class="hidden-480">Back to Product List </span>
+    </a>
+  </div>
+</div>
+<div class="portlet-body">
+  <form novalidate #form="ngForm" (ngSubmit)="submitForm(form.valid,$event)">
+    <div class="form-horizontal">
+      <div class="form-group">
+        <input type="hidden" #productId="ngModel" id="productId" name="productId" [(ngModel)]="model.productId" />
+        <label class="control-label col-md-2" for="Item"> Name : </label>
+        <div class="col-md-6">
+          <input type="text" id="name" class="form-control" required
+                 maxlength="100" name="name" [(ngModel)]="model.name" #name="ngModel" trim>
+          <span class="text-danger" *ngIf="(name.errors != null &&
+                                 name.errors.required &&
+                                (name.dirty || form.submitted))">
+            Please enter name.
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2" for="Item"> Category : </label>
+        <div class="col-md-6">
+          <select class="form-control" id="categoryId" name="categoryId" [(ngModel)]="model.categoryId" #categoryId="ngModel">
+            <option value="0">--Category--</option>
+            <option *ngFor="let dropDown of typeDropDowns" value={{dropDown.itemId}}> {{dropDown.itemValue}} </option>
+          </select>
+          <span class="text-danger" *ngIf="(categoryId.errors != null &&
+                                 categoryId.errors.required &&
+                                (categoryId.dirty || form.submitted))">
+            Please enter category.
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2" for="Item"> Description : </label>
+        <div class="col-md-6">
+          <input type="text" id="description" class="form-control" required
+                 maxlength="100" name="description" [(ngModel)]="model.description" #description="ngModel" trim>
+          <span class="text-danger" *ngIf="(description.errors != null &&
+                                 description.errors.required &&
+                                (description.dirty || form.submitted))">
+            Please enter description.
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2" for="Item"> Cost : </label>
+        <div class="col-md-6">
+          <input type="text" id="cost" class="form-control" required
+                 maxlength="100" name="cost" [(ngModel)]="model.cost" #cost="ngModel" trim>
+          <span class="text-danger" *ngIf="(cost.errors != null &&
+                                 cost.errors.required &&
+                                (cost.dirty || form.submitted))">
+            Please enter cost.
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-offset-2 col-md-6">
+          <!--<input type="submit" value="Submit" [tabindex]="helper.isSubmitted ? -1:0" [class.disabled]="helper.isSubmitted" class="btn blue" id="AddItem" />-->
+          <input type="submit" value="Submit" class="btn blue info" id="AddItem" />
+          <!--<a [routerLink]="['/product-list']" class="btn red"> Cancel</a>-->
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
