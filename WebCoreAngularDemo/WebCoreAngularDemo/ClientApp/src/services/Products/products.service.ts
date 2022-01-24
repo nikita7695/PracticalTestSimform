@@ -36,7 +36,7 @@ export class ProductService {
     const options = {
       headers: headers
     };
-    return this.httpClient.post<Products>(this.baseUrl + 'api/Product/save', model, options).pipe(map(response => response));;
+    return this.httpClient.post<Products>(this.baseUrl + 'api/Product/save', model, options);
   }
   public DeleteProduct(productID): Observable<Products> {
     //const headers = new HttpHeaders().set('Authorization', this.userAccessToken);
